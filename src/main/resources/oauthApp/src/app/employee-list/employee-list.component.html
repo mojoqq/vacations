@@ -1,0 +1,35 @@
+<div *ngIf="_empl | async as employees">
+  <h3 class="pt-3 pb-3">Сотрудники</h3>
+  <mat-card>
+  <mat-card *ngFor="let emp of employees.content" class="mt-2 mb-2">
+      <mat-card-content>
+        <div class="row p-0 m-0">
+          <div class="col-11 p-0 m-0">
+            <p> {{emp.lastname}} {{emp.firstname}} {{emp.middlename}}</p>
+          </div>
+          <div class="col-1 p-0 m-0">
+            <button mat-icon-button aria-label="Дополнительно" [matMenuTriggerFor]="options">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #options>
+              <button mat-menu-item (click)="editVacationOnEmployee(emp.id)">Управлять отпуском</button>
+              <button mat-menu-item (click)="deleteEmployeeOnPressButton(emp.id)">Удалить сотрудника</button>
+            </mat-menu>
+          </div>
+        </div>
+
+
+      </mat-card-content>
+  </mat-card>
+  </mat-card>
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]="lenght"
+    [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="pageNum">
+  </mat-paginator>
+</div>
+
+

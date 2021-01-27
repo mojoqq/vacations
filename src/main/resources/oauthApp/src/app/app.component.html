@@ -1,0 +1,44 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">yagami.prjct</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link pt-2" routerLink="home" *ngIf="isLoggedIn">Мой отпуск</a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <button class="nav-link pt-1"  mat-button [matMenuTriggerFor]="menu">Управление</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="users">Управление сотрудниками</button>
+          <mat-menu #users>
+            <button mat-menu-item routerLink="register">Создать нового пользователя</button>
+            <button mat-menu-item routerLink="all">Список сотрудников</button>
+          </mat-menu>
+          <button mat-menu-item>  <a href="http://localhost:8080/rest/api/excel" target="_blank">Скачать отчет в Excel</a></button>
+        </mat-menu>
+
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register" *ngIf="isLoggedIn && roles[0] == 'ROLE_ADMIN'">Новый пользователь</a>
+      </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link" routerLink="login">Войти</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="profile">Вы вошли как:  {{ username }} </a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">Выйти</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

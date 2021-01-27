@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.kek{
+  border: 1px solid red;
+}
+
+.disabledContent
+{
+  cursor: not-allowed;
+  background-color: rgb(229, 229, 229) !important;
+}
+
+.disabledContent > *
+{
+  pointer-events:none;
+}
+
+.hide{
+  display: none;
+}
